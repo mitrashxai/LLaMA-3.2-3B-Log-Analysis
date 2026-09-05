@@ -51,13 +51,6 @@ The low BLEU/ROUGE-L alongside a high BERTScore suggests the model's responses a
 
 ---
 
-### Project Structure
-
-- `Dataset/`: The LogLM instruction dataset (train/validation/test splits) and the custom cross-domain evaluation set (BGL, Hadoop, Linux, HDFS, Apache).
-- `Results/`: Full evaluation outputs and comparison tables.
-
----
-
 ### Notes
 
 - Fine-tuning was performed using LLaMA-Factory's training pipeline (web UI) rather than a custom training script; this repository documents the exact configuration and results rather than the training code itself.
