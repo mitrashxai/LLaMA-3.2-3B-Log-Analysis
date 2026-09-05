@@ -1,13 +1,13 @@
 # Fine-Tuning LLaMA-3.2-3B for Log Analysis Using LLaMA-Factory
 
-This project fine-tunes **LLaMA-3.2-3B-Instruct** (4-bit quantized) with **LoRA** for multi-task log analysis, using the **LLaMA-Factory** framework. The goal was to evaluate how a fine-tuned open-source LLM performs against the published **LogLM** baseline across log parsing, anomaly detection, log interpretation, root cause analysis, and solution recommendation — including generalization to log domains not seen during training.
+This project fine-tunes **LLaMA-3.2-3B-Instruct** (4-bit quantized) with **LoRA** for multi-task log analysis, using the **LLaMA-Factory** framework. The goal was to evaluate how a fine-tuned open-source LLM performs against the published **LogLM** baseline across log parsing, anomaly detection, log interpretation, root cause analysis, and solution recommendation, including generalization to log domains not seen during training.
 
 ### Project Highlights
 
 - **Base Model:** LLaMA-3.2-3B-Instruct, loaded in 4-bit quantization for efficient fine-tuning.
-- **Fine-Tuning Method:** LoRA (parameter-efficient fine-tuning) via the LLaMA-Factory framework, trained for 6 epochs (final training loss ≈ 0.66, validation loss ≈ 0.50).
-- **Dataset:** The instruction dataset introduced in the **LogLM** paper (Liu et al., *LogLM: From Task-Based to Instruction-Based Automated Log Analysis*, arXiv:2410.09352) — 2,632 instruction–input–output pairs spanning log parsing, anomaly detection, log interpretation, root cause analysis, and solution recommendation. Split 85% train+validation / 15% test (10% of the training portion held out for validation).
-- **Beyond the Original Benchmark:** In addition to reproducing the LogLM evaluation, the model was tested on a custom cross-domain dataset that includes **Apache logs** — a domain not present in the original training data — to probe generalization to unseen log formats.
+- **Fine-Tuning Method:** LoRA (parameter-efficient fine-tuning) via the LLaMA-Factory framework, trained for 6 epochs.
+- **Dataset:** The instruction dataset introduced in the LogLM paper (Liu et al., *LogLM: From Task-Based to Instruction-Based Automated Log Analysis*, arXiv:2410.09352), 2,632 instruction–input–output pairs spanning log parsing, anomaly detection, log interpretation, root cause analysis, and solution recommendation. Split 85% train+validation / 15% test (10% of the training portion held out for validation).
+- **Beyond the Original Benchmark:** In addition to reproducing the LogLM evaluation, the model was tested on a custom cross-domain dataset that includes Apache logs, a domain not present in the original training data, to probe generalization to unseen log formats.
 
 ---
 
@@ -17,23 +17,20 @@ This project fine-tunes **LLaMA-3.2-3B-Instruct** (4-bit quantized) with **LoRA*
 
 | Method | BLEU | ROUGE-L | BERTScore |
 |---|---|---|---|
-| LogLM (Paper) | 12.074 | 30.14 | – |
 | **Our Model** | **24.69** | **68.21** | **95.0** |
 
-Roughly double the BLEU and ROUGE-L of the published LogLM baseline.
 
 **2. Anomaly Detection**
 
 | Method | F1 Score |
 |---|---|
-| LogLM (Paper) | 57.4 |
 | **Our Model** | **73** |
 
-Evaluated on 24 logs combining the original BGL domain with **Thunderbird**, a domain not seen during training.
+Evaluated on 24 logs combining the original BGL domain with Thunderbird, a domain not seen during training.
 
 **3. Cross-Domain Log Parsing (Custom Dataset)**
 
-A new 30-sample dataset was built across BGL, Hadoop, Linux, HDFS, and **Apache** (a domain not in the original dataset), 6 samples per domain.
+A new 30-sample dataset was built across BGL, Hadoop, Linux, HDFS, and Apache (a domain not in the original dataset), 6 samples per domain.
 
 | Evaluation Set | F1 | Levenshtein Ratio |
 |---|---|---|
@@ -50,7 +47,7 @@ Evaluated on Apache domain logs, using GPT-5-generated references as ground trut
 |---|---|---|
 | 3.8 | 19.17 | 87.38 |
 
-The low BLEU/ROUGE-L alongside a high BERTScore suggests the model's responses are **semantically correct but lexically different** from the reference text — a common pattern for open-ended generation tasks where many valid phrasings exist.
+The low BLEU/ROUGE-L alongside a high BERTScore suggests the model's responses are semantically correct but lexically different from the reference text — a common pattern for open-ended generation tasks where many valid phrasings exist.
 
 ---
 
