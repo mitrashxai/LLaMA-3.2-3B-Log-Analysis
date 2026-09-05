@@ -1,6 +1,6 @@
 # Fine-Tuning LLaMA-3.2-3B for Log Analysis Using LLaMA-Factory
 
-This project fine-tunes **LLaMA-3.2-3B-Instruct** (4-bit quantized) with **LoRA** for multi-task log analysis, using the **LLaMA-Factory** framework. The goal was to evaluate how a fine-tuned open-source LLM performs against the published **LogLM** baseline across log parsing, anomaly detection, log interpretation, root cause analysis, and solution recommendation, including generalization to log domains not seen during training.
+This project fine-tunes LLaMA-3.2-3B-Instruct (4-bit quantized) with LoRA for multi-task log analysis, using the LLaMA-Factory framework. The goal was to evaluate how a fine-tuned open-source LLM performs against the published LogLM baseline across log parsing, anomaly detection, log interpretation, root cause analysis, and solution recommendation, including generalization to log domains not seen during training.
 
 ### Project Highlights
 
